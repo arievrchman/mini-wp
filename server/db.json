@@ -1,0 +1,28 @@
+{
+  "myArticles": [
+    {
+      "title": "Nasi Goreng Sate",
+      "description": "Kuliner",
+      "contents": "Lorem ipsum dolor sit amet, no qui debet putant sententiae, in sumo eros ius, usu purto eius in. No vix impetus graecis voluptua, sed et indoctum omittantur",
+      "id": 1
+    },
+    {
+      "title": "Nasi Uduk Depan",
+      "description": "Kuliner",
+      "contents": "Lorem ipsum dolor sit amet, no qui debet putant sententiae, in sumo eros ius, usu purto eius in. No vix impetus graecis voluptua, sed et indoctum omittantur",
+      "id": 2
+    },
+    {
+      "title": "Mie Goreng",
+      "description": "Lifestyle",
+      "contents": "Lorem ipsum dolor sit amet, no qui debet putant sententiae, in sumo eros ius, usu purto eius in. No vix impetus graecis voluptua, sed et indoctum omittantur",
+      "id": 3
+    },
+    {
+      "title": "Mie Aceh Special",
+      "description": "Lifestyle",
+      "contents": "Lorem ipsum dolor sit amet, no qui debet putant sententiae, in sumo eros ius, usu purto eius in. No vix impetus graecis voluptua, sed et indoctum omittantur",
+      "id": 4
+    }
+  ]
+}

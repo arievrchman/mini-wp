@@ -1,0 +1,34 @@
+.container {
+  margin-left: 0px !important;
+}
+
+.sidebar {
+  padding: 0px !important;
+}
+
+.sidebar h4 {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px;
+  color: #777a7c;
+}
+
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+.sidebar li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.sidebar li:hover {
+  background-color: #bec3c8;
+}
+
+.sidebar span {
+  font-family: 'Acme', sans-serif;
+  font-weight: 200;
+  margin-left: 10px;
+}

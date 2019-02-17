@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link type="text/css" rel="stylesheet" href="./css/style.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+  <!-- Bootstrap core CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Material Design Bootstrap -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.1/css/mdb.min.css" rel="stylesheet">
+  <!-- Vue -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.2/dist/vue.js"></script>
+  <!-- Include stylesheet -->
+  <link rel="stylesheet" href="./css/vueWysiwyg.css">
+  <title>My Wordpress</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <!--Navbar -->
+    <nav class="mb-1 navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="nav-control-logo ml-auto">
+        <img src="./img/nav-logo.png" alt="" height="60px">
+      </div>
+
+      <div class="nav-control-profile ml-auto">
+        <!--Modal: Login / Register Button-->
+        <div v-if="!isLogin" class="text-center">
+          <a href="" class="btn btn-sm btn-elegant btn-rounded my-3" data-toggle="modal" data-target="#modalLRForm">
+            SignUp/SignIn
+          </a>
+        </div>
+        <!--Modal: Login / Register Button-->
+
+        <!--Logout Button-->
+        <div v-else class="collapse navbar-collapse" id="navbarSupportedContent-4">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
+            aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-4" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user"></i> Profile </a>
+              <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+                <a class="dropdown-item" href="">My account</a>
+                <a v-on:click.prevent="signOut" class="dropdown-item" href="">Log out</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <!--Logout Button-->
+      </div>
+    </nav>
+
+    <!-- Section -->
+    <div class="container">
+      <div class="row">
+
+        <!-- Sidebar -->
+        <div class="sidebar col-2 border-right">
+          <div class="sidebar">
+            <h4>Dashboard</h4>
+            <ul>
+              <li>
+                <i v-on:click="discoverEvents=true, myArticleEvents=false, createArticleEvents=false"
+                  class="fas fa-blog">
+                  <span>Discover</span>
+                </i>
+              </li>
+              <div v-if="isLogin" class="for-login">
+                <li
+                  v-on:click="createArticleEvents=true, discoverEvents=false, myArticleEvents=false, showFormEdit=false">
+                  <i class="far fa-newspaper r-3">
+                    <span>Create Article</span>
+                  </i>
+                </li>
+                <li
+                  v-on:click="myArticleEvents=true, discoverEvents=false, createArticleEvents=false, showFormEdit=false">
+                  <i class="fas fa-tasks">
+                    <span>My Article</span>
+                  </i>
+                </li>
+              </div>
+            </ul>
+          </div>
+        </div>
+
+        <!--Modal: Login / Register Form-->
+        <div class="modal fade" id="modalLRForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog cascading-modal" role="document">
+            <!--Content-->
+            <div class="modal-content">
+
+              <!--Modal cascading tabs-->
+              <div class="modal-c-tabs">
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#login" role="tab"><i
+                        class="fas fa-user mr-1"></i>
+                      Login</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#register" role="tab"><i
+                        class="fas fa-user-plus mr-1"></i>
+                      Register</a>
+                  </li>
+                </ul>
+
+                <!-- Tab panels -->
+                <div class="tab-content">
+                  <!--Panel Login-->
+                  <div class="tab-pane fade in show active" id="login" role="tabpanel">
+
+                    <!--Body-->
+                    <form v-on:submit.prevent="signIn" method="post">
+                      <div class="modal-body mb-1">
+                        <div class="md-form form-sm mb-5">
+                          <i class="fas fa-envelope prefix"></i>
+                          <input v-model="emailSignIn" type="email" id="modalLRInput10"
+                            class="form-control form-control-sm">
+                          <label for="modalLRInput10">Your email</label>
+                        </div>
+
+                        <div class="md-form form-sm mb-4">
+                          <i class="fas fa-lock prefix"></i>
+                          <input v-model="passwordSignIn" type="password" id="modalLRInput11"
+                            class="form-control form-control-sm">
+                          <label for="modalLRInput11">Your password</label>
+                        </div>
+                        <div class="text-center mt-2">
+                          <button class="btn btn-info">Log in <i class="fas fa-sign-in ml-1"></i></button>
+                        </div>
+                      </div>
+                    </form>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-info waves-effect ml-auto"
+                        data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                  <!--/.Panel Login-->
+
+                  <!--Panel Register-->
+                  <div class="tab-pane fade" id="register" role="tabpanel">
+
+                    <!--Body-->
+                    <form v-on:submit.prevent="signUp" method="post">
+                      <div class="modal-body">
+                        <div class="md-form form-sm mb-5">
+                          <i class="fas fa-user prefix"></i>
+                          <input v-model="nameSignUp" type="text" class="form-control form-control-sm">
+                          <label>Your name</label>
+                        </div>
+
+                        <div class="md-form form-sm mb-5">
+                          <i class="fas fa-envelope prefix"></i>
+                          <input v-model="emailSignUp" type="email" class="form-control form-control-sm">
+                          <label>Your email</label>
+                        </div>
+
+                        <div class="md-form form-sm mb-4">
+                          <i class="fas fa-lock prefix"></i>
+                          <input v-model="passwordSignUp" type="password" class="form-control form-control-sm">
+                          <label>Your password</label>
+                        </div>
+
+                        <div class="text-center form-sm mt-2">
+                          <button class="btn btn-info">Sign up <i class="fas fa-sign-in ml-1"></i></button>
+                        </div>
+
+                      </div>
+                    </form>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal"
+                        aria-hidden="true">&times;Close</button>
+                    </div>
+                  </div>
+                  <!--/.Panel Register-->
+                </div>
+
+              </div>
+            </div>
+            <!--/.Content-->
+          </div>
+        </div>
+        <!--Modal: Login / Register Form-->
+
+        <!-- Content -->
+        <div class="col-10">
+
+          <!-- Section create article -->
+          <div class="create-article" v-show="createArticleEvents">
+            <!-- Article Form -->
+            <div class="create-article-header border-top d-flex flex-column align-items-center">
+              <img src="./img/undraw_blog_anyj.png" style="width: 30%">
+              <h4 class="mt-3 mb-3" style="font-weight: 500;">Create new article</h4>
+              <p style="font-size: 15px">Post your first article on My WordPress</p>
+            </div>
+            <div class="create-article-text m-4">
+              <form @submit.prevent="addArticle" method="POST">
+                <div class="article-box d-flex flex-column w-25 mr-2 mb-3">
+                  <span class="font-weight-bold">Title :</span>
+                  <input v-model="title" placeholder="Title..." style="font-size: 13px; width: fit-content">
+                  <span class="font-weight-bold">Description :</label>
+                    <input v-model="description" placeholder="Description..."
+                      style="font-size: 13px; width: fit-content;">
+                </div>
+                <div class="wysiwyg">
+                  <wysiwyg v-model="text" />
+                </div>
+                <div class="submit-btn d-flex justify-content-end pt-2">
+                  <button type="submit" class="btn btn-sm btn-blue-grey">Create</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Section discover article -->
+          <div class="discover-article" v-show="discoverEvents">
+            <div class="row">
+              <div class="col-lg-6 col-md-12 my-5">
+                <img src="./img/undraw_world_9iqb.png" style="width: 70%">
+              </div>
+              <div class="col-lg-6 col-md-12 my-5 d-flex align-items-center">
+                <h4>
+                  Discover Article around The Worlds
+                </h4>
+              </div>
+            </div>
+
+            <!-- Search Discover Article -->
+            <div class="search-box p-3 d-flex">
+              <input v-model="qSearch" class="form-control" type="text" placeholder="Search"aria-label="Search">
+            </div>
+
+            <section class="my-5">
+                <!-- Grid row -->
+                <div class="row">
+                  <!-- Grid column -->
+                  <div class="col-lg-6 col-md-12" v-for="data in filterAllArticle">
+                    <!-- Featured news -->
+                    <div class="single-news mb-4">
+                      <!-- Image -->
+                      <div class="view overlay rounded z-depth-1-half mb-4">
+                        <img class="img-fluid" src="">
+                        <a>
+                          <div class="mask rgba-white-slight"></div>
+                        </a>
+                      </div>
+                      <!-- Data -->
+                      <div class="news-data d-flex justify-content-between">
+                        <h6 class="light-blue-text font-weight-bold">{{ data.description}}</h6>
+                        <p class="font-weight-bold dark-grey-text">{{ data.created_at.slice(0, 10) }}</p>
+                      </div>
+  
+                      <!-- Excerpt -->
+                      <h3 class="font-weight-bold dark-grey-text mb-3">
+                        <a>{{ data.title }}</a>
+                      </h3>
+                      <p class="">
+                        Author: {{ data.author.name }}
+                      </p>
+                      <p v-text class="dark-grey-text">
+                        {{ data.content.slice(0, 150) }}
+                      </p>
+                    </div>
+  
+                  </div>
+                  <!-- Grid column -->
+                </div>
+              </section>
+
+          </div>
+
+          <!-- Section my article-->
+          <div class="my-article" v-show="myArticleEvents">
+            <!-- Header -->
+            <div class="row">
+              <div class="col-lg-6 col-md-12 my-5">
+                <img src="./img/undraw_file_searching_duff.png" style="width: 70%">
+              </div>
+              <div class="col-lg-6 col-md-12 my-5 d-flex align-items-center">
+                <h4>
+                  Search MyArticle
+                </h4>
+              </div>
+            </div>
+
+            <!-- Search Own Article -->
+            <div class="search-box p-3 d-flex">
+              <input v-model="qOwnSearch" class="form-control" type="text" placeholder="Search" aria-label="Search">
+            </div>
+
+            <!-- Main Section -->
+            <section class="my-5">
+              <!-- Grid row -->
+              <div class="row">
+                <!-- Grid column -->
+                <div class="col-lg-6 col-md-12" v-for="data in filterOwnArticle">
+                  <!-- Featured news -->
+                  <div class="single-news mb-4">
+                    <!-- Image -->
+                    <div class="view overlay rounded z-depth-1-half mb-4">
+                      <img class="img-fluid" src="">
+                      <a>
+                        <div class="mask rgba-white-slight"></div>
+                      </a>
+                    </div>
+                    <!-- Data -->
+                    <div class="news-data d-flex justify-content-between">
+                      <h6 class="light-blue-text font-weight-bold">{{ data.description}}</h6>
+                      <p class="font-weight-bold dark-grey-text">{{ data.created_at.slice(0, 10) }}</p>
+                    </div>
+
+                    <!-- Excerpt -->
+                    <h3 class="font-weight-bold dark-grey-text mb-3">
+                      <a>{{ data.title }}</a>
+                    </h3>
+                    <p class="">
+                        Author: {{ data.author.name }}
+                    </p>
+                    <p class="dark-grey-text">
+                      {{ data.content.slice(0, 150) }}
+                    </p>
+                    <div class="edit-delete-article d-flex justify-content-between">
+                      <a @click.prevent="myArticleEvents=false, showFormEdit=true, formEdit(data)" href=""><i
+                          class="fas fa-edit"></i></a>
+                      <a @click.prevent="deleteArticle(data._id)" href="">
+                        <i class="fas fa-trash-alt" style="color:red"></i>
+                      </a>
+                    </div>
+                  </div>
+
+                </div>
+                <!-- Grid column -->
+              </div>
+            </section>
+
+          </div>
+
+          <!-- Section edit article -->
+          <div class="create-article" v-show="showFormEdit">
+            <!-- Article Form -->
+            <div class="create-article-header border-top d-flex flex-column 
+          align-items-center">
+              <img src="./img/undraw_blog_anyj.png" style="width: 30%">
+              <h4 class="mt-3 mb-3" style="font-weight: 500;">Edit Article</h4>
+              <!-- <p style="font-size: 15px">Post your first article on My WordPress</p> -->
+            </div>
+            <div class="create-article-text m-4">
+              <form @submit.prevent="editArticle" method="POST">
+                <div class="article-box d-flex flex-column w-25 mr-2 mb-3">
+                  <span class="font-weight-bold">Title :</span>
+                  <input v-model="title" placeholder="Title..." style="font-size: 13px; width: 
+          fit-content">
+                  <span class="font-weight-bold">Description :</label>
+                    <input v-model="description" placeholder="Description..."
+                      style="font-size: 13px; width: fit-content;">
+                </div>
+                <div class="wysiwyg">
+                  <wysiwyg v-model="text" />
+                </div>
+                <div class="submit-btn d-flex justify-content-end pt-2">
+                  <button type="submit" class="btn btn-sm btn-blue-grey">Edit</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Secrtion read article-->
+          <div class="read-article">
+            
+          </div>
+
+
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- JQuery -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.7.1/js/mdb.min.js"></script>
+  <!-- Axios -->
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <!-- html editor -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="./js/vueWysiwyg.js"></script>
+  <script src="./js/index.js"></script>
+</body>
+
+</html>
