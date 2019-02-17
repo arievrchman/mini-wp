@@ -11,21 +11,26 @@ var app = new Vue({
     nameSignUp: '',
     emailSignUp: '',
     passwordSignUp: '',
-    // ---- display control ---- //
+    // ---- display sidebar ---- //
     discoverEvents: true,
     createArticleEvents: false,
     myArticleEvents: false,
+    // ---- display content ---- //
     showFormEdit: false,
-    shorArticles: false,
-    //---- data articles ---- //
+    showArticles: false,
+    // ---- list articles ---- //
     discoverArticles: [],
     ownArticles: [],
+    //---- data articles ---- //
     id: '',
     title: '',
     description: '',
     text: '',
+    author: '',
     qSearch: '',
-    qOwnSearch: ''
+    qOwnSearch: '',
+    readArt: {},
+    file: ''
   },
   methods: {
     signUp: function () {
@@ -116,16 +121,31 @@ var app = new Vue({
           console.log(err);
         });
     },
+    handleFileUpload: function () {
+      this.file = this.$refs.file.files[0];
+      console.log(this.file);
+    },
     addArticle: function () {
+
+      let data = new FormData();
+      data.append('file', this.file);
+      data.append('title', this.title);
+      data.append('description', this.description);
+      data.append('content', this.text);
+
       axios({
         method: 'POST',
         url: 'http://localhost:3000/articles',
-        data: {
-          title: this.title,
-          description: this.description,
-          content: this.text,
-        },
-        headers: { token: localStorage.getItem('token') }
+        data,
+        // data: {
+        //   title: this.title,
+        //   description: this.description,
+        //   content: this.text,
+        // },
+        headers: {
+          token: localStorage.getItem('token'),
+          'Content-Type': 'multipart/form-data'
+        }
       })
         .then(({ data: { result: data } }) => {
           this.clearValue();
@@ -186,8 +206,10 @@ var app = new Vue({
           console.log(err);
         });
     },
-    readArticle: function() {
-
+    readArticle: function (article) {
+      this.readArt = article;
+      this.author = this.readArt.author.name
+      console.log(this.readArt.author);
     }
   },
   created: function () {
@@ -203,12 +225,13 @@ var app = new Vue({
     filterOwnArticle: function () {
       return this.ownArticles.filter(art => {
         let title = art.title;
-        return new RegExp('.*' + this.qOwnSearch + '.*').test(title.toLowerCase());
+        if (title) return new RegExp('.*' + this.qOwnSearch + '.*').test(title.toLowerCase());
       })
     },
     filterAllArticle: function () {
       return this.discoverArticles.filter(art => {
-        let title = art.title; return new RegExp('.*' + this.qSearch + '.*').test(title.toLowerCase());
+        let title = art.title;
+        if (title) return new RegExp('.*' + this.qSearch + '.*').test(title.toLowerCase());
       })
     }
   }

@@ -69,20 +69,20 @@
             <h4>Dashboard</h4>
             <ul>
               <li>
-                <i v-on:click="discoverEvents=true, myArticleEvents=false, createArticleEvents=false"
+                <i v-on:click="discoverEvents=true, myArticleEvents=false, createArticleEvents=false, showArticles=false"
                   class="fas fa-blog">
                   <span>Discover</span>
                 </i>
               </li>
               <div v-if="isLogin" class="for-login">
                 <li
-                  v-on:click="createArticleEvents=true, discoverEvents=false, myArticleEvents=false, showFormEdit=false">
+                  v-on:click="createArticleEvents=true, discoverEvents=false, myArticleEvents=false, showFormEdit=false, showArticles=false">
                   <i class="far fa-newspaper r-3">
                     <span>Create Article</span>
                   </i>
                 </li>
                 <li
-                  v-on:click="myArticleEvents=true, discoverEvents=false, createArticleEvents=false, showFormEdit=false">
+                  v-on:click="myArticleEvents=true, discoverEvents=false, createArticleEvents=false, showFormEdit=false, showArticles=false">
                   <i class="fas fa-tasks">
                     <span>My Article</span>
                   </i>
@@ -92,110 +92,110 @@
           </div>
         </div>
 
-        <!--Modal: Login / Register Form-->
-        <div class="modal fade" id="modalLRForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-          aria-hidden="true">
-          <div class="modal-dialog cascading-modal" role="document">
-            <!--Content-->
-            <div class="modal-content">
-
-              <!--Modal cascading tabs-->
-              <div class="modal-c-tabs">
-
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
-                  <li class="nav-item">
-                    <a class="nav-link active" data-toggle="tab" href="#login" role="tab"><i
-                        class="fas fa-user mr-1"></i>
-                      Login</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#register" role="tab"><i
-                        class="fas fa-user-plus mr-1"></i>
-                      Register</a>
-                  </li>
-                </ul>
-
-                <!-- Tab panels -->
-                <div class="tab-content">
-                  <!--Panel Login-->
-                  <div class="tab-pane fade in show active" id="login" role="tabpanel">
-
-                    <!--Body-->
-                    <form v-on:submit.prevent="signIn" method="post">
-                      <div class="modal-body mb-1">
-                        <div class="md-form form-sm mb-5">
-                          <i class="fas fa-envelope prefix"></i>
-                          <input v-model="emailSignIn" type="email" id="modalLRInput10"
-                            class="form-control form-control-sm">
-                          <label for="modalLRInput10">Your email</label>
-                        </div>
-
-                        <div class="md-form form-sm mb-4">
-                          <i class="fas fa-lock prefix"></i>
-                          <input v-model="passwordSignIn" type="password" id="modalLRInput11"
-                            class="form-control form-control-sm">
-                          <label for="modalLRInput11">Your password</label>
-                        </div>
-                        <div class="text-center mt-2">
-                          <button class="btn btn-info">Log in <i class="fas fa-sign-in ml-1"></i></button>
-                        </div>
-                      </div>
-                    </form>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-outline-info waves-effect ml-auto"
-                        data-dismiss="modal">Close</button>
-                    </div>
-                  </div>
-                  <!--/.Panel Login-->
-
-                  <!--Panel Register-->
-                  <div class="tab-pane fade" id="register" role="tabpanel">
-
-                    <!--Body-->
-                    <form v-on:submit.prevent="signUp" method="post">
-                      <div class="modal-body">
-                        <div class="md-form form-sm mb-5">
-                          <i class="fas fa-user prefix"></i>
-                          <input v-model="nameSignUp" type="text" class="form-control form-control-sm">
-                          <label>Your name</label>
-                        </div>
-
-                        <div class="md-form form-sm mb-5">
-                          <i class="fas fa-envelope prefix"></i>
-                          <input v-model="emailSignUp" type="email" class="form-control form-control-sm">
-                          <label>Your email</label>
-                        </div>
-
-                        <div class="md-form form-sm mb-4">
-                          <i class="fas fa-lock prefix"></i>
-                          <input v-model="passwordSignUp" type="password" class="form-control form-control-sm">
-                          <label>Your password</label>
-                        </div>
-
-                        <div class="text-center form-sm mt-2">
-                          <button class="btn btn-info">Sign up <i class="fas fa-sign-in ml-1"></i></button>
-                        </div>
-
-                      </div>
-                    </form>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal"
-                        aria-hidden="true">&times;Close</button>
-                    </div>
-                  </div>
-                  <!--/.Panel Register-->
-                </div>
-
-              </div>
-            </div>
-            <!--/.Content-->
-          </div>
-        </div>
-        <!--Modal: Login / Register Form-->
-
         <!-- Content -->
         <div class="col-10">
+
+          <!--Modal: Login / Register Form-->
+          <div class="modal fade" id="modalLRForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog cascading-modal" role="document">
+              <!--Content-->
+              <div class="modal-content">
+
+                <!--Modal cascading tabs-->
+                <div class="modal-c-tabs">
+
+                  <!-- Nav tabs -->
+                  <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
+                    <li class="nav-item">
+                      <a class="nav-link active" data-toggle="tab" href="#login" role="tab"><i
+                          class="fas fa-user mr-1"></i>
+                        Login</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" data-toggle="tab" href="#register" role="tab"><i
+                          class="fas fa-user-plus mr-1"></i>
+                        Register</a>
+                    </li>
+                  </ul>
+
+                  <!-- Tab panels -->
+                  <div class="tab-content">
+                    <!--Panel Login-->
+                    <div class="tab-pane fade in show active" id="login" role="tabpanel">
+
+                      <!--Body-->
+                      <form v-on:submit.prevent="signIn" method="post">
+                        <div class="modal-body mb-1">
+                          <div class="md-form form-sm mb-5">
+                            <i class="fas fa-envelope prefix"></i>
+                            <input v-model="emailSignIn" type="email" id="modalLRInput10"
+                              class="form-control form-control-sm">
+                            <label for="modalLRInput10">Your email</label>
+                          </div>
+
+                          <div class="md-form form-sm mb-4">
+                            <i class="fas fa-lock prefix"></i>
+                            <input v-model="passwordSignIn" type="password" id="modalLRInput11"
+                              class="form-control form-control-sm">
+                            <label for="modalLRInput11">Your password</label>
+                          </div>
+                          <div class="text-center mt-2">
+                            <button class="btn btn-info">Log in <i class="fas fa-sign-in ml-1"></i></button>
+                          </div>
+                        </div>
+                      </form>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-info waves-effect ml-auto"
+                          data-dismiss="modal">Close</button>
+                      </div>
+                    </div>
+                    <!--/.Panel Login-->
+
+                    <!--Panel Register-->
+                    <div class="tab-pane fade" id="register" role="tabpanel">
+
+                      <!--Body-->
+                      <form v-on:submit.prevent="signUp" method="post">
+                        <div class="modal-body">
+                          <div class="md-form form-sm mb-5">
+                            <i class="fas fa-user prefix"></i>
+                            <input v-model="nameSignUp" type="text" class="form-control form-control-sm">
+                            <label>Your name</label>
+                          </div>
+
+                          <div class="md-form form-sm mb-5">
+                            <i class="fas fa-envelope prefix"></i>
+                            <input v-model="emailSignUp" type="email" class="form-control form-control-sm">
+                            <label>Your email</label>
+                          </div>
+
+                          <div class="md-form form-sm mb-4">
+                            <i class="fas fa-lock prefix"></i>
+                            <input v-model="passwordSignUp" type="password" class="form-control form-control-sm">
+                            <label>Your password</label>
+                          </div>
+
+                          <div class="text-center form-sm mt-2">
+                            <button class="btn btn-info">Sign up <i class="fas fa-sign-in ml-1"></i></button>
+                          </div>
+
+                        </div>
+                      </form>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal"
+                          aria-hidden="true">&times;Close</button>
+                      </div>
+                    </div>
+                    <!--/.Panel Register-->
+                  </div>
+
+                </div>
+              </div>
+              <!--/.Content-->
+            </div>
+          </div>
+          <!--Modal: Login / Register Form-->
 
           <!-- Section create article -->
           <div class="create-article" v-show="createArticleEvents">
@@ -206,13 +206,14 @@
               <p style="font-size: 15px">Post your first article on My WordPress</p>
             </div>
             <div class="create-article-text m-4">
-              <form @submit.prevent="addArticle" method="POST">
+              <form @submit.prevent="addArticle">
                 <div class="article-box d-flex flex-column w-25 mr-2 mb-3">
                   <span class="font-weight-bold">Title :</span>
                   <input v-model="title" placeholder="Title..." style="font-size: 13px; width: fit-content">
-                  <span class="font-weight-bold">Description :</label>
-                    <input v-model="description" placeholder="Description..."
-                      style="font-size: 13px; width: fit-content;">
+                  <span class="font-weight-bold">Description :</span>
+                  <input v-model="description" placeholder="Description..."
+                    style="font-size: 13px; width: fit-content;">
+                  <input type="file" class="mt-3 small" id="file" ref="file" v-on:change="handleFileUpload()">
                 </div>
                 <div class="wysiwyg">
                   <wysiwyg v-model="text" />
@@ -239,45 +240,47 @@
 
             <!-- Search Discover Article -->
             <div class="search-box p-3 d-flex">
-              <input v-model="qSearch" class="form-control" type="text" placeholder="Search"aria-label="Search">
+              <input v-model="qSearch" class="form-control" type="text" placeholder="Search" aria-label="Search">
             </div>
 
             <section class="my-5">
-                <!-- Grid row -->
-                <div class="row">
-                  <!-- Grid column -->
-                  <div class="col-lg-6 col-md-12" v-for="data in filterAllArticle">
-                    <!-- Featured news -->
-                    <div class="single-news mb-4">
-                      <!-- Image -->
-                      <div class="view overlay rounded z-depth-1-half mb-4">
-                        <img class="img-fluid" src="">
-                        <a>
-                          <div class="mask rgba-white-slight"></div>
-                        </a>
-                      </div>
-                      <!-- Data -->
-                      <div class="news-data d-flex justify-content-between">
-                        <h6 class="light-blue-text font-weight-bold">{{ data.description}}</h6>
-                        <p class="font-weight-bold dark-grey-text">{{ data.created_at.slice(0, 10) }}</p>
-                      </div>
-  
-                      <!-- Excerpt -->
-                      <h3 class="font-weight-bold dark-grey-text mb-3">
-                        <a>{{ data.title }}</a>
-                      </h3>
-                      <p class="">
-                        Author: {{ data.author.name }}
-                      </p>
-                      <p v-text class="dark-grey-text">
-                        {{ data.content.slice(0, 150) }}
-                      </p>
+              <!-- Grid row -->
+              <div class="row">
+                <!-- Grid column -->
+                <div class="col-lg-6 col-md-12" v-for="data in filterAllArticle" :key="data._id">
+                  <!-- Featured news -->
+                  <div class="single-news mb-4">
+                    <!-- Image -->
+                    <div class="view overlay rounded z-depth-1-half mb-4">
+                      <img class="img-fluid" :src="data.featured_image">
+                      <a>
+                        <div class="mask rgba-white-slight"></div>
+                      </a>
                     </div>
-  
+                    <!-- Data -->
+                    <div class="news-data d-flex justify-content-between">
+                      <h6 class="light-blue-text font-weight-bold">{{ data.description}}</h6>
+                      <p class="font-weight-bold dark-grey-text">{{ data.created_at.slice(0, 10) }}</p>
+                    </div>
+
+                    <!-- Excerpt -->
+                    <h3 class="font-weight-bold dark-grey-text mb-3"
+                      v-on:click="showArticles=true, discoverEvents=false, readArticle(data)">
+                      <a>{{ data.title }}</a>
+                    </h3>
+                    <p class="small">
+                      <!-- {{ data.featured_image }} -->
+                      Author: {{ data.author.name }}
+                    </p>
+                    <p class="dark-grey-text text-truncate">
+                      <span v-html="data.content"></span>
+                    </p>
                   </div>
-                  <!-- Grid column -->
+
                 </div>
-              </section>
+                <!-- Grid column -->
+              </div>
+            </section>
 
           </div>
 
@@ -305,12 +308,12 @@
               <!-- Grid row -->
               <div class="row">
                 <!-- Grid column -->
-                <div class="col-lg-6 col-md-12" v-for="data in filterOwnArticle">
+                <div class="col-lg-6 col-md-12" v-for="data in filterOwnArticle" :key="data._id">
                   <!-- Featured news -->
                   <div class="single-news mb-4">
                     <!-- Image -->
                     <div class="view overlay rounded z-depth-1-half mb-4">
-                      <img class="img-fluid" src="">
+                      <img class="img-fluid" :src="data.featured_image">
                       <a>
                         <div class="mask rgba-white-slight"></div>
                       </a>
@@ -324,12 +327,13 @@
                     <!-- Excerpt -->
                     <h3 class="font-weight-bold dark-grey-text mb-3">
                       <a>{{ data.title }}</a>
+                      <!-- {{}} -->
                     </h3>
-                    <p class="">
-                        Author: {{ data.author.name }}
+                    <p class="small">
+                      Author: {{ data.author.name }}
                     </p>
-                    <p class="dark-grey-text">
-                      {{ data.content.slice(0, 150) }}
+                    <p class="dark-grey-text text-truncate">
+                      <span v-html="data.content"></span>
                     </p>
                     <div class="edit-delete-article d-flex justify-content-between">
                       <a @click.prevent="myArticleEvents=false, showFormEdit=true, formEdit(data)" href=""><i
@@ -377,8 +381,17 @@
           </div>
 
           <!-- Secrtion read article-->
-          <div class="read-article">
-            
+          <div class="read-article" v-show="showArticles">
+            <article class="article">
+              <header class="header">
+                <div class="desc mb-3">{{ readArt.description }}</div>
+                <h1 class="headline">{{ readArt.title }}</h1>
+                <div class="meta">
+                  by <span class="author"> {{ readArt.author && readArt.author.name }} </span>
+                </div>
+              </header>
+              <p><span v-html="readArt.content"></span></p>
+            </article>
           </div>
 
 

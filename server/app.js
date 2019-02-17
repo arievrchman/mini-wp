@@ -1,18 +1,23 @@
-const express = require('express');
-const app = express();
-const mongoose = require('mongoose');
-const cors = require('cors');
-const axios = require('axios');
-const mainRoutes = require('./routes/index');
 require('dotenv').config();
- 
+// depedencies
+const express = require('express');
+const logger = require('morgan');
+const mongoose = require('mongoose');
+const routes = require('./routes/index');
+
+// create express instance
+const app = express();
+
+// connect to database
 mongoose.connect('mongodb://localhost:27017/mini-wp', { useNewUrlParser: true });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors());
 
-app.use('/', mainRoutes);
+app.use(logger('dev'));
+app.use(require('cors')());
+
+app.use('/', routes);
 
 const port = process.env.PORT || 3000;
 app.listen(port, function () {

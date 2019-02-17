@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
 .container {
   margin-left: 0px !important;
 }
@@ -31,4 +33,35 @@ ul {
   font-family: 'Acme', sans-serif;
   font-weight: 200;
   margin-left: 10px;
+}
+
+.article {
+  max-width: 610px;
+  margin: 0 auto;
+  padding: 60px 30px 90px;
+}
+
+.header .desc {
+  font-family: 'Montserrat', sans-serif;
+  color: #7b8994;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 1.342em;
+  line-height: 1;
+}
+.header h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  font-size: 2.415em;
+  line-height: 1.2;
+  letter-spacing: -1px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid gray;
+  */
+}
+
+.read-article p {
+  margin-top: 2em;
+  margin-bottom: 1em;
+  line-height: 2em;
 }

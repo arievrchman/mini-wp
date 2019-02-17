@@ -35,12 +35,14 @@ module.exports = {
       });
   },
   createNewArticle: function (req, res) {
+    console.log(req.file);
     Article
       .create({
         author: req.auth_user._id,
         title: req.body.title,
         description: req.body.description,
-        content: req.body.content
+        content: req.body.content,
+        featured_image: req.file.cloudStoragePublicUrl
       })
       .then((data) => {
         res.status(201).json({
