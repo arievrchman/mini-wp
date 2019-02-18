@@ -183,6 +183,7 @@ var app = new Vue({
           // });
           this.clearValue();
           this.myArticles();
+          this.allArticles();
         })
         .catch((err) => {
           console.log(err);

@@ -69,7 +69,7 @@
             <h4>Dashboard</h4>
             <ul>
               <li>
-                <i v-on:click="discoverEvents=true, myArticleEvents=false, createArticleEvents=false, showArticles=false"
+                <i v-on:click="discoverEvents=true, myArticleEvents=false, createArticleEvents=false, showArticles=false, showFormEdit=false"
                   class="fas fa-blog">
                   <span>Discover</span>
                 </i>
@@ -252,7 +252,7 @@
                   <div class="single-news mb-4">
                     <!-- Image -->
                     <div class="view overlay rounded z-depth-1-half mb-4">
-                      <img class="img-fluid" :src="data.featured_image">
+                      <img class="card-img-top" :src="data.featured_image" style="max-height: 335px; object-fit: cover;">
                       <a>
                         <div class="mask rgba-white-slight"></div>
                       </a>
@@ -313,7 +313,7 @@
                   <div class="single-news mb-4">
                     <!-- Image -->
                     <div class="view overlay rounded z-depth-1-half mb-4">
-                      <img class="img-fluid" :src="data.featured_image">
+                      <img class="card-img-top" :src="data.featured_image" style="max-height: 335px; object-fit: cover;">
                       <a>
                         <div class="mask rgba-white-slight"></div>
                       </a>
@@ -417,7 +417,7 @@
   <!-- html editor -->
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <script src="./js/vueWysiwyg.js"></script>
-  <script src="./js/index.js"></script>
+  <script src="./js/main.js"></script>
 </body>
 
 </html>
